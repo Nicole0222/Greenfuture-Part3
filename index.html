@@ -1,91 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>GreenFuture NGO - Best Tree Planting NGO in Johannesburg</title>
-    <meta name="description" content="GreenFuture NGO in Johannesburg plants trees, runs environmental education in 45 schools, and community clean-ups. Keyword: tree planting NGO Johannesburg">
-    <meta name="keywords" content="tree planting NGO Johannesburg, GreenFuture, environmental education Soweto">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GreenFuture | Sustainable Development NGO Johannesburg South Africa</title>
+<meta name="description" content="GreenFuture is a Johannesburg-based NGO driving sustainable development, clean energy, and community empowerment across South Africa.">
+<meta name="keywords" content="GreenFuture NGO Johannesburg, sustainability South Africa, clean energy NGO, environmental NGO Gauteng">
+<meta name="author" content="GreenFuture">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yourusername.github.io/greenfuture/index.html">
+<style>
+body{font-family:Arial; margin:0; padding:0; line-height:1.6;}
+header{background:#2E8B57; color:white; padding:20px; text-align:center;}
+nav a{color:white; margin:0 15px; text-decoration:none; font-weight:bold;}
+main{padding:20px; max-width:1000px; margin:auto;}
+img{max-width:100%; height:auto;}
+</style>
 </head>
-<body style="margin:0; font-family:'Lora', serif; color:#1D2B22;">
-
-    <header style="background-color:#245C36; padding:20px 40px;">
-        <div style="max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center;">
-            <img src="images/logo.png" alt="GreenFuture Logo - Tree Planting NGO Johannesburg" style="height:50px;">
-            <nav>
-                <a href="index.html" style="color:white; text-decoration:none; margin:0 15px; font-family:'Poppins', sans-serif;">Home</a>
-                <a href="about.html" style="color:white; text-decoration:none; margin:0 15px; font-family:'Poppins', sans-serif;">About</a>
-                <a href="programs.html" style="color:white; text-decoration:none; margin:0 15px; font-family:'Poppins', sans-serif;">Programs</a>
-                <a href="enquiry.html" style="color:white; text-decoration:none; margin:0 15px; font-family:'Poppins', sans-serif;">Get Involved</a>
-                <a href="contact.html" style="color:white; text-decoration:none; margin:0 15px; font-family:'Poppins', sans-serif;">Contact</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- H1 H2 FOR SEO -->
-    <section style="background-color:#E7F1E4; padding:60px 40px;">
-        <div style="max-width:1200px; margin:auto; display:flex; align-items:center;">
-            <div style="width:50%; padding-right:30px;">
-                <h1 style="color:#245C36; font-family:'Poppins', sans-serif; font-size:42px; margin:0;">GREENFUTURE NGO - Tree Planting Johannesburg</h1>
-                <h2 style="color:#4E7C50; font-family:'Poppins', sans-serif; font-size:28px;">Together For A Greener Tomorrow</h2>
-                <p style="font-size:18px; line-height:1.6;">We work with communities, schools and volunteers to create greener neighbourhoods across Johannesburg. Keyword: environmental NGO Soweto.</p>
-                <a href="enquiry.html" style="background-color:#245C36; color:white; padding:15px 30px; text-decoration:none; font-family:'Poppins', sans-serif; display:inline-block; margin-top:20px;">Join The Movement</a>
-            </div>
-            <div style="width:50%;"><img src="images/hero.png" alt="Community planting trees in Johannesburg" style="width:100%;"></div>
-        </div>
-    </section>
-
-    <!-- ACCORDION - Interactive Element with jQuery -->
-    <section style="background-color:white; padding:40px; max-width:900px; margin:auto;">
-        <h2 style="color:#245C36; font-family:'Poppins', sans-serif;">FAQ - Click to open (Accordion)</h2>
-        <div class="accordion-header" style="background:#F1F7EE; padding:15px; cursor:pointer; margin-top:10px; border-left:5px solid #245C36;">What does GreenFuture do?</div>
-        <div class="accordion-content" style="display:none; padding:15px; border:1px solid #eee;">We plant trees, educate 45 schools, and clean rivers in Johannesburg.</div>
-        <div class="accordion-header" style="background:#F1F7EE; padding:15px; cursor:pointer; margin-top:10px; border-left:5px solid #245C36;">Where are you based?</div>
-        <div class="accordion-content" style="display:none; padding:15px; border:1px solid #eee;">Soweto, Johannesburg. See our interactive map below - Local SEO.</div>
-    </section>
-
-    <!-- INTERACTIVE MAP - Required -->
-    <section style="background-color:#FBF7EE; padding:40px; text-align:center;">
-        <h2 style="color:#245C36; font-family:'Poppins', sans-serif;">Find Us - Interactive Map</h2>
-        <div id="map" style="height:250px; max-width:900px; margin:auto; border:2px solid #245C36;"></div>
-    </section>
-
-    <!-- DYNAMIC CONTENT + SEARCH + SORT - Required -->
-    <section style="background-color:white; padding:40px; max-width:900px; margin:auto;">
-        <h2 style="color:#245C36; font-family:'Poppins', sans-serif;">Our Programs - Search & Sort (Dynamic JS)</h2>
-        <input type="text" id="searchBox" placeholder="Search programs... e.g Tree" style="padding:10px; width:60%; border:1px solid #4E7C50;">
-        <select id="sortBox" style="padding:10px; border:1px solid #4E7C50;"><option value="">Sort</option><option value="low">Cheap first</option><option value="high">Expensive first</option></select>
-        <div id="program-list" style="margin-top:20px;"></div>
-    </section>
-
-    <!-- GALLERY WITH LIGHTBOX - Required -->
-    <section style="background-color:#F1F7EE; padding:40px; text-align:center;">
-        <h2 style="color:#245C36; font-family:'Poppins', sans-serif;">Gallery - Lightbox</h2>
-        <div>
-            <img src="images/hero.png" alt="Tree planting in Soweto Johannesburg" style="width:150px; height:100px; object-fit:cover; margin:5px; cursor:pointer;" onclick="openLightbox(this.src)">
-            <img src="images/team.png" alt="GreenFuture volunteers Johannesburg" style="width:150px; height:100px; object-fit:cover; margin:5px; cursor:pointer;" onclick="openLightbox(this.src)">
-            <img src="images/education.png" alt="Environmental education in schools" style="width:150px; height:100px; object-fit:cover; margin:5px; cursor:pointer;" onclick="openLightbox(this.src)">
-        </div>
-        <div id="lightbox" onclick="closeLightbox()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center;"><img id="lightbox-img" style="max-width:80%;"></div>
-    </section>
-
-    <footer style="background-color:#1D2B22; color:white; padding:30px; text-align:center;">
-        <p>GreenFuture NGO | Soweto, Johannesburg | © 2026</p>
-        <p><a href="enquiry.html" style="color:white;">Enquiry</a> | <a href="contact.html" style="color:white;">Contact</a> | <a href="sitemap.xml" style="color:white;">Sitemap</a></p>
-    </footer>
-
-<script>
-const programs = [{name:"Urban Tree Planting", price:50, type:"planting"}, {name:"Environmental Education", price:200, type:"education"}, {name:"Community Clean-Ups", price:0, type:"cleanup"}];
-function loadPrograms(list){ let c=document.getElementById('program-list'); if(!c) return; c.innerHTML=""; list.forEach(p=>{ c.innerHTML+=`<div style='border:1px solid #ccc; padding:15px; margin:10px 0; border-top:5px solid #4E7C50; transition:0.3s;' onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'"><h3 style='color:#245C36; margin:0;'>${p.name}</h3><p>Cost: R${p.price} | Type: ${p.type}</p></div>`; });}
-document.addEventListener('DOMContentLoaded', ()=>{ loadPrograms(programs); document.getElementById('searchBox')?.addEventListener('input', e=>{ loadPrograms(programs.filter(p=>p.name.toLowerCase().includes(e.target.value.toLowerCase()))); }); document.getElementById('sortBox')?.addEventListener('change', e=>{ let s=[...programs].sort((a,b)=> e.target.value==='low'? a.price-b.price : b.price-a.price); loadPrograms(s); }); });
-$(document).ready(function(){ $(".accordion-header").click(function(){ $(this).next(".accordion-content").slideToggle(); }); });
-function openLightbox(src){ document.getElementById('lightbox-img').src=src; document.getElementById('lightbox').style.display='flex'; }
-function closeLightbox(){ document.getElementById('lightbox').style.display='none'; }
-var map = L.map('map').setView([-26.2041, 28.0473], 12); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); L.marker([-26.2041, 28.0473]).addTo(map).bindPopup("GreenFuture - Soweto, Johannesburg").openPopup();
-</script>
+<body>
+<header>
+<h1>GreenFuture NGO</h1>
+<nav><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="enquiry.html">Enquiry</a><a href="contact.html">Contact</a></nav>
+</header>
+<main>
+<h1>Building a Sustainable Future in Johannesburg</h1>
+<h2>Who We Are</h2>
+<p>GreenFuture is an environmental NGO based in Johannesburg, Gauteng, South Africa.</p>
+<img src="images/home.jpg" alt="GreenFuture team planting trees in Johannesburg South Africa">
+<h2>Our Impact</h2>
+<p>We focus on clean energy, community gardens, and youth education across South Africa.</p>
+</main>
 </body>
 </html>
