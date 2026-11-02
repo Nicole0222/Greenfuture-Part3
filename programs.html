@@ -4,70 +4,102 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Programs | GreenFuture Clean Energy & Gardening Johannesburg</title>
-<meta name="description" content="Explore GreenFuture programs with interactive gallery and FAQs.">
+<meta name="description" content="Explore GreenFuture programs with search and filter.">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 body{font-family:Arial; margin:0;} header{background:#2E8B57; color:white; padding:20px; text-align:center;} nav a{color:white; margin:0 15px; text-decoration:none;}
 main{padding:20px; max-width:1000px; margin:auto;}
-.accordion-header{background:#f4f4f4; padding:15px; cursor:pointer; margin:5px 0; border-left:4px solid #2E8B57; transition:0.3s;}
+.accordion-header{background:#f4f4f4; padding:15px; cursor:pointer; margin:5px 0; border-left:4px solid #2E8B57;}
 .accordion-header:hover{background:#2E8B57; color:white;}
-.accordion-content{padding:15px; background:#fff; border:1px solid #ddd; display:none;}
+.accordion-content{padding:15px; border:1px solid #ddd; display:none;}
 .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin:20px 0;}
-.gallery-img{width:100%; height:200px; object-fit:cover; cursor:pointer; border-radius:8px; transition:transform 0.3s, box-shadow 0.3s;}
-.gallery-img:hover{transform:scale(1.05); box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+.gallery-img{width:100%; height:200px; object-fit:cover; cursor:pointer; border-radius:8px; transition:0.3s;}
+.gallery-img:hover{transform:scale(1.05);}
 #lightbox{display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:1000; text-align:center; padding-top:50px;}
-#lightbox-img{max-width:90%; max-height:80%; border-radius:10px;}
-.program-card{border:1px solid #ddd; padding:15px; margin:10px 0; border-radius:8px; transition:0.3s;}
-.program-card:hover{box-shadow:0 4px 10px rgba(0,0,0,0.1); transform:translateY(-3px);}
+#lightbox-img{max-width:90%; max-height:80%;}
+.controls{margin:20px 0; display:flex; gap:10px; flex-wrap:wrap;}
+.controls input, .controls select{padding:10px; border:1px solid #2E8B57; border-radius:5px;}
+.program-card{border:1px solid #ddd; padding:15px; margin:10px 0; border-radius:8px;}
 </style>
 </head>
 <body>
 <header><h1>Our Programs</h1><nav><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="enquiry.html">Enquiry</a><a href="contact.html">Contact</a></nav></header>
 <main>
-<h1>GreenFuture Programs in Johannesburg</h1>
+<h1>Programs - Search, Filter & Sort</h1>
 
-<div class="program-card"><h3>Solar Training</h3><p>Clean energy training for youth in Gauteng.</p></div>
-<div class="program-card"><h3>Community Gardening</h3><p>Urban food gardens in Soweto and central Johannesburg.</p></div>
-<div class="program-card"><h3>Youth Education</h3><p>Sustainability workshops for schools.</p></div>
+<div class="controls">
+<input type="text" id="search" placeholder="Search programs (e.g. solar, garden)..." onkeyup="filterPrograms()">
+<select id="categoryFilter" onchange="filterPrograms()">
+<option value="all">All Categories</option>
+<option value="energy">Clean Energy</option>
+<option value="food">Food Security</option>
+<option value="education">Education</option>
+</select>
+<select id="sort" onchange="sortPrograms()">
+<option value="name">Sort by Name</option>
+<option value="price">Sort by Price</option>
+</select>
+</div>
 
-<h2>Program Gallery - Lightbox</h2>
-<div class="gallery">
-<img src="images/solar.jpg" class="gallery-img" alt="Solar panel training program in Johannesburg township">
-<img src="images/garden.jpg" class="gallery-img" alt="Community gardening program Gauteng South Africa">
-<img src="images/youth.jpg" class="gallery-img" alt="Youth education sustainability workshop Johannesburg">
+<div id="programList">
+<div class="program-card" data-category="energy" data-name="Solar Training" data-price="50">
+<h3>Solar Training - R50</h3><p>Category: Clean Energy | Location: Johannesburg CBD</p><p>Learn solar installation for townships.</p>
+</div>
+<div class="program-card" data-category="food" data-name="Community Gardening" data-price="50">
+<h3>Community Gardening - R50</h3><p>Category: Food Security | Location: Soweto</p><p>Urban food gardens for families.</p>
+</div>
+<div class="program-card" data-category="education" data-name="Youth Education" data-price="50">
+<h3>Youth Education Workshop - R50</h3><p>Category: Education | Location: Alexandra</p><p>Sustainability for schools.</p>
+</div>
 </div>
 
 <h2>FAQs - jQuery Accordion</h2>
 <div class="faq">
-<h3 class="accordion-header">What is GreenFuture's mission in Johannesburg?</h3>
-<div class="accordion-content"><p>We promote sustainable development, clean energy, and food security across Johannesburg and Gauteng province.</p></div>
-<h3 class="accordion-header">How to volunteer for programs?</h3>
-<div class="accordion-content"><p>Visit our enquiry page to calculate costs and check availability. Programs cost R50 per person.</p></div>
-<h3 class="accordion-header">Where are programs held?</h3>
-<div class="accordion-content"><p>Main office in Johannesburg CBD, with sites in Soweto, Alexandra, and Pretoria. See map on About page.</p></div>
-<h3 class="accordion-header">What is the cost?</h3>
-<div class="accordion-content"><p>Each program is R50 per person. Use our enquiry calculator to estimate total cost based on quantity.</p></div>
+<h3 class="accordion-header">How to volunteer?</h3>
+<div class="accordion-content"><p>Visit enquiry page, use calculator.</p></div>
+<h3 class="accordion-header">What is cost?</h3>
+<div class="accordion-content"><p>R50 per person. Discount for 10+ people.</p></div>
 </div>
 
-<div id="lightbox"><span style="color:white; position:absolute; top:20px; right:30px; font-size:40px; cursor:pointer;">&times;</span><img id="lightbox-img"></div>
+<h2>Gallery</h2>
+<div class="gallery">
+<img src="images/solar.jpg" class="gallery-img" alt="Solar program Johannesburg">
+<img src="images/garden.jpg" class="gallery-img" alt="Gardening program Gauteng">
+<img src="images/youth.jpg" class="gallery-img" alt="Youth workshop">
+</div>
+<div id="lightbox"><img id="lightbox-img"></div>
 </main>
 
 <script>
-// jQuery Accordion
+// FILTER
+function filterPrograms(){
+ let search=document.getElementById('search').value.toLowerCase();
+ let category=document.getElementById('categoryFilter').value;
+ document.querySelectorAll('.program-card').forEach(card=>{
+   let text=card.textContent.toLowerCase();
+   let cat=card.dataset.category;
+   let matchSearch=text.includes(search);
+   let matchCat=category==='all' || cat===category;
+   card.style.display=(matchSearch && matchCat)?'':'none';
+ });
+}
+// SORT
+function sortPrograms(){
+ let sortBy=document.getElementById('sort').value;
+ let list=document.getElementById('programList');
+ let cards=[...list.children];
+ cards.sort((a,b)=>{
+   if(sortBy==='name') return a.dataset.name.localeCompare(b.dataset.name);
+   if(sortBy==='price') return a.dataset.price - b.dataset.price;
+ });
+ cards.forEach(c=>list.appendChild(c));
+}
 $(document).ready(function(){
-  $(".accordion-content").hide();
-  $(".accordion-header").click(function(){
-    $(this).next(".accordion-content").slideToggle(300);
-    $(".accordion-content").not($(this).next()).slideUp(300);
-  });
+ $(".accordion-content").hide();
+ $(".accordion-header").click(function(){ $(this).next().slideToggle(300); });
 });
-
-// Lightbox Gallery
 document.querySelectorAll('.gallery-img').forEach(img=>{
-  img.addEventListener('click', ()=>{ 
-    document.getElementById('lightbox-img').src=img.src; 
-    document.getElementById('lightbox').style.display='block';
-  });
+ img.addEventListener('click', ()=>{ document.getElementById('lightbox-img').src=img.src; document.getElementById('lightbox').style.display='block'; });
 });
 document.getElementById('lightbox').onclick=()=>{document.getElementById('lightbox').style.display='none';};
 </script>

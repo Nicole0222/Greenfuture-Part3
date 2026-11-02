@@ -3,16 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enquire | Join GreenFuture Programs Johannesburg</title>
-<meta name="description" content="Enquire about GreenFuture NGO programs in Johannesburg. Calculate costs, check availability, and book your spot in sustainability workshops.">
-<meta name="keywords" content="Enquire GreenFuture Johannesburg, NGO program booking South Africa, sustainability workshop cost">
-<style>body{font-family:Arial; margin:0;} header{background:#2E8B57; color:white; padding:20px; text-align:center;} nav a{color:white; margin:0 15px; text-decoration:none;}</style>
+<title>Enquire | Join GreenFuture Programs Johannesburg - Cost Calculator</title>
+<meta name="description" content="Enquire about GreenFuture programs with cost calculator R50 per person.">
+<style>
+body{font-family:Arial; margin:0;} header{background:#2E8B57; color:white; padding:20px; text-align:center;} nav a{color:white; margin:0 15px; text-decoration:none;}
+main{padding:20px; max-width:700px; margin:auto;}
+.calculator{background:#f9f9f9; padding:20px; border:2px solid #2E8B57; border-radius:10px; margin:20px 0;}
+label{display:block; margin:10px 0 5px; font-weight:bold;}
+input, select, textarea{width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;}
+button{background:#2E8B57; color:white; padding:12px 20px; border:none; border-radius:5px; cursor:pointer;}
+button:hover{background:#1e5a3a;}
+#totalCost{font-size:24px; color:#2E8B57; font-weight:bold;}
+.availability{padding:10px; border-radius:5px; margin:10px 0;}
+.available{background:#d4edda; color:#155724;}
+.limited{background:#fff3cd; color:#856404;}
+</style>
 </head>
 <body>
-<header><h1>Enquiry</h1><nav><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="enquiry.html">Enquiry</a><a href="contact.html">Contact</a></nav></header>
-<main style="padding:20px;">
-<h1>Enquire About Our Programs in Johannesburg</h1>
-<p>Fill form below to join.</p>
+<header><h1>Enquiry & Booking</h1><nav><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="enquiry.html">Enquiry</a><a href="contact.html">Contact</a></nav></header>
+<main>
+<h1>Enquire - Cost Calculator</h1>
+
+<div class="calculator">
+<h2>Program Cost Calculator - R50 per person</h2>
+
+<label for="programSelect">Select Program:</label>
+<select id="programSelect" onchange="calcCost()">
+<option value="50" data-name="Solar Training">Solar Training - R50 pp</option>
+<option value="50" data-name="Community Gardening">Community Gardening - R50 pp</option>
+<option value="50" data-name="Youth Education">Youth Education - R50 pp</option>
+<option value="50" data-name="Clean Water Workshop">Clean Water Workshop - R50 pp</option>
+</select>
+
+<label for="qty">Number of People (Quantity):</label>
+<input type="number" id="qty" value="1" min="1" max="100" oninput="calcCost()">
+
+<label for="date">Preferred Date:</label>
+<input type="date" id="date" onchange="checkAvailability()">
+
+<p>Total Cost: R<span id="totalCost">50</span></p>
+<p>Formula: R50 x <span id="qtyDisplay">1</span> = R<span id="totalDisplay">50</span></p>
+
+<div id="availability" class="availability available">Availability: Available - Book now!</div>
+<div id="discountMsg" style="color:green; font-weight:bold;"></div>
+
+<button onclick="compileEnquiry()">Compile Enquiry for Contact Page</button>
+<p id="compiled" style="background:#eee; padding:10px; margin-top:15px;"></p>
+</div>
 </main>
+
+<script>
+function calcCost(){
+ let price=50;
+ let qty=parseInt(document.getElementById('qty').value) || 1;
+ if(qty < 1) qty=1;
+ let total=price*qty;
+ document.getElementById('totalCost').innerText=total;
+ document.getElementById('qtyDisplay').innerText=qty;
+ document.getElementById('totalDisplay').innerText=total;
+ 
+ let discountMsg=document.getElementById('discountMsg');
+ if(qty >= 10){ discountMsg.innerText="Group discount! 10% off for 10+ people. New total: R"+(total*0.9); }
+ else { discountMsg.innerText=""; }
+ checkAvailability();
+}
+function checkAvailability(){
+ let qty=parseInt(document.getElementById('qty').value) || 1;
+ let date=document.getElementById('date').value;
+ let avail=document.getElementById('availability');
+ if(qty > 20){ avail.className="availability limited"; avail.innerText="Availability: Limited - Large group, please contact 2 weeks in advance"; }
+ else if(date){ avail.className="availability available"; avail.innerText="Availability: Available for "+date+" - "+qty+" spots reserved"; }
+ else { avail.className="availability available"; avail.innerText="Availability: Available - Book now!"; }
+}
+function compileEnquiry(){
+ let prog=document.getElementById('programSelect').options[document.getElementById('programSelect').selectedIndex].text;
+ let qty=document.getElementById('qty').value;
+ let total=document.getElementById('totalCost').innerText;
+ let date=document.getElementById('date').value;
+ let text=`Enquiry: ${prog} | Quantity: ${qty} | Total: R${total} | Date: ${date || 'Not set'}`;
+ document.getElementById('compiled').innerText=text + " - Copy this to contact form or click button below to email.";
+ localStorage.setItem('greenfuture_enquiry', text);
+}
+calcCost();
+</script>
 </body>
 </html>
