@@ -4,18 +4,72 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Programs | GreenFuture Clean Energy & Gardening Johannesburg</title>
-<meta name="description" content="Explore GreenFuture programs: Solar Training, Community Gardening, Youth Education workshops in Johannesburg, South Africa.">
-<meta name="keywords" content="GreenFuture programs Johannesburg, solar training Gauteng, community gardening NGO">
-<style>body{font-family:Arial; margin:0;} header{background:#2E8B57; color:white; padding:20px; text-align:center;} nav a{color:white; margin:0 15px; text-decoration:none;}</style>
+<meta name="description" content="Explore GreenFuture programs with interactive gallery and FAQs.">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+body{font-family:Arial; margin:0;} header{background:#2E8B57; color:white; padding:20px; text-align:center;} nav a{color:white; margin:0 15px; text-decoration:none;}
+main{padding:20px; max-width:1000px; margin:auto;}
+.accordion-header{background:#f4f4f4; padding:15px; cursor:pointer; margin:5px 0; border-left:4px solid #2E8B57; transition:0.3s;}
+.accordion-header:hover{background:#2E8B57; color:white;}
+.accordion-content{padding:15px; background:#fff; border:1px solid #ddd; display:none;}
+.gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin:20px 0;}
+.gallery-img{width:100%; height:200px; object-fit:cover; cursor:pointer; border-radius:8px; transition:transform 0.3s, box-shadow 0.3s;}
+.gallery-img:hover{transform:scale(1.05); box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+#lightbox{display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:1000; text-align:center; padding-top:50px;}
+#lightbox-img{max-width:90%; max-height:80%; border-radius:10px;}
+.program-card{border:1px solid #ddd; padding:15px; margin:10px 0; border-radius:8px; transition:0.3s;}
+.program-card:hover{box-shadow:0 4px 10px rgba(0,0,0,0.1); transform:translateY(-3px);}
+</style>
 </head>
 <body>
 <header><h1>Our Programs</h1><nav><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="enquiry.html">Enquiry</a><a href="contact.html">Contact</a></nav></header>
-<main style="padding:20px;">
-<h1>GreenFuture Sustainability Programs in Johannesburg</h1>
-<h2>Solar Training</h2><img src="images/solar.jpg" alt="Solar panel training program in Johannesburg township">
-<p>Clean energy training for youth.</p>
-<h2>Community Gardening</h2><img src="images/garden.jpg" alt="Community gardening program Gauteng South Africa">
-<p>Urban food gardens.</p>
+<main>
+<h1>GreenFuture Programs in Johannesburg</h1>
+
+<div class="program-card"><h3>Solar Training</h3><p>Clean energy training for youth in Gauteng.</p></div>
+<div class="program-card"><h3>Community Gardening</h3><p>Urban food gardens in Soweto and central Johannesburg.</p></div>
+<div class="program-card"><h3>Youth Education</h3><p>Sustainability workshops for schools.</p></div>
+
+<h2>Program Gallery - Lightbox</h2>
+<div class="gallery">
+<img src="images/solar.jpg" class="gallery-img" alt="Solar panel training program in Johannesburg township">
+<img src="images/garden.jpg" class="gallery-img" alt="Community gardening program Gauteng South Africa">
+<img src="images/youth.jpg" class="gallery-img" alt="Youth education sustainability workshop Johannesburg">
+</div>
+
+<h2>FAQs - jQuery Accordion</h2>
+<div class="faq">
+<h3 class="accordion-header">What is GreenFuture's mission in Johannesburg?</h3>
+<div class="accordion-content"><p>We promote sustainable development, clean energy, and food security across Johannesburg and Gauteng province.</p></div>
+<h3 class="accordion-header">How to volunteer for programs?</h3>
+<div class="accordion-content"><p>Visit our enquiry page to calculate costs and check availability. Programs cost R50 per person.</p></div>
+<h3 class="accordion-header">Where are programs held?</h3>
+<div class="accordion-content"><p>Main office in Johannesburg CBD, with sites in Soweto, Alexandra, and Pretoria. See map on About page.</p></div>
+<h3 class="accordion-header">What is the cost?</h3>
+<div class="accordion-content"><p>Each program is R50 per person. Use our enquiry calculator to estimate total cost based on quantity.</p></div>
+</div>
+
+<div id="lightbox"><span style="color:white; position:absolute; top:20px; right:30px; font-size:40px; cursor:pointer;">&times;</span><img id="lightbox-img"></div>
 </main>
+
+<script>
+// jQuery Accordion
+$(document).ready(function(){
+  $(".accordion-content").hide();
+  $(".accordion-header").click(function(){
+    $(this).next(".accordion-content").slideToggle(300);
+    $(".accordion-content").not($(this).next()).slideUp(300);
+  });
+});
+
+// Lightbox Gallery
+document.querySelectorAll('.gallery-img').forEach(img=>{
+  img.addEventListener('click', ()=>{ 
+    document.getElementById('lightbox-img').src=img.src; 
+    document.getElementById('lightbox').style.display='block';
+  });
+});
+document.getElementById('lightbox').onclick=()=>{document.getElementById('lightbox').style.display='none';};
+</script>
 </body>
 </html>

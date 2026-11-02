@@ -4,18 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us | GreenFuture NGO Johannesburg - Mission & Team</title>
-<meta name="description" content="Learn about GreenFuture's mission, vision, and team based in Johannesburg. Committed to sustainable development in South Africa since 2015.">
-<meta name="keywords" content="About GreenFuture, NGO Johannesburg team, sustainable development mission South Africa">
-<meta name="author" content="GreenFuture">
-<style>body{font-family:Arial; margin:0;} header{background:#2E8B57; color:white; padding:20px; text-align:center;} nav a{color:white; margin:0 15px; text-decoration:none;}</style>
+<meta name="description" content="Learn about GreenFuture's mission, vision, and team based in Johannesburg.">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+body{font-family:Arial; margin:0;} header{background:#2E8B57; color:white; padding:20px; text-align:center;} nav a{color:white; margin:0 15px; text-decoration:none;}
+main{padding:20px; max-width:1000px; margin:auto;}
+#map{height:400px; width:100%; margin:20px 0; border-radius:10px; border:2px solid #2E8B57;}
+</style>
 </head>
 <body>
 <header><h1>About GreenFuture</h1><nav><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="enquiry.html">Enquiry</a><a href="contact.html">Contact</a></nav></header>
-<main style="padding:20px;">
+<main>
 <h1>About GreenFuture NGO Johannesburg</h1>
-<h2>Our Mission</h2><p>Empowering communities in Johannesburg and across Gauteng.</p>
-<img src="images/team.jpg" alt="GreenFuture NGO team members in Johannesburg office">
-<h2>Our Vision</h2><p>A green, sustainable South Africa.</p>
+<h2>Our Mission</h2><p>Empowering communities in Johannesburg and across Gauteng with sustainable solutions.</p>
+<img src="images/team.jpg" alt="GreenFuture NGO team members in Johannesburg office" style="width:100%; max-width:600px;">
+
+<h2>Find Us in Johannesburg</h2>
+<div id="map"></div>
+
+<h2>Why Johannesburg?</h2>
+<p>We are strategically located in Gauteng to serve urban and rural communities.</p>
 </main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// Johannesburg coordinates
+var map = L.map('map').setView([-26.2041, 28.0473], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap'
+}).addTo(map);
+L.marker([-26.2041, 28.0473]).addTo(map).bindPopup('<b>GreenFuture NGO</b><br>123 Green Street<br>Johannesburg, 2000<br>South Africa').openPopup();
+L.marker([-26.195246, 28.034088]).addTo(map).bindPopup('Community Garden Site 1 - Soweto');
+</script>
 </body>
 </html>
