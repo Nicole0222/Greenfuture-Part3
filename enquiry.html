@@ -3,88 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enquire | Join GreenFuture Programs Johannesburg - Cost Calculator</title>
-<meta name="description" content="Enquire about GreenFuture programs with cost calculator R50 per person.">
+<title>Enquire | GreenFuture Programs Johannesburg Cost Calculator</title>
+<meta name="description" content="Enquire with cost calculator and validated form.">
 <style>
 body{font-family:Arial; margin:0;} header{background:#2E8B57; color:white; padding:20px; text-align:center;} nav a{color:white; margin:0 15px; text-decoration:none;}
 main{padding:20px; max-width:700px; margin:auto;}
-.calculator{background:#f9f9f9; padding:20px; border:2px solid #2E8B57; border-radius:10px; margin:20px 0;}
+.calculator{background:#f9f9f9; padding:20px; border:2px solid #2E8B57; border-radius:10px;}
 label{display:block; margin:10px 0 5px; font-weight:bold;}
-input, select, textarea{width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;}
-button{background:#2E8B57; color:white; padding:12px 20px; border:none; border-radius:5px; cursor:pointer;}
-button:hover{background:#1e5a3a;}
-#totalCost{font-size:24px; color:#2E8B57; font-weight:bold;}
-.availability{padding:10px; border-radius:5px; margin:10px 0;}
-.available{background:#d4edda; color:#155724;}
-.limited{background:#fff3cd; color:#856404;}
+input, select, textarea{width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;}
+button{background:#2E8B57; color:white; padding:12px; border:none; border-radius:5px; cursor:pointer; width:100%; margin-top:10px;}
+.error{color:red; font-size:13px;}
+.success{color:green; font-weight:bold; background:#d4edda; padding:10px; border-radius:5px; margin-top:10px;}
 </style>
 </head>
 <body>
-<header><h1>Enquiry & Booking</h1><nav><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="enquiry.html">Enquiry</a><a href="contact.html">Contact</a></nav></header>
+<header><h1>Enquiry</h1><nav><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="enquiry.html">Enquiry</a><a href="contact.html">Contact</a></nav></header>
 <main>
-<h1>Enquire - Cost Calculator</h1>
+<h1>Enquiry Form with Cost Calculator</h1>
 
 <div class="calculator">
-<h2>Program Cost Calculator - R50 per person</h2>
-
-<label for="programSelect">Select Program:</label>
-<select id="programSelect" onchange="calcCost()">
-<option value="50" data-name="Solar Training">Solar Training - R50 pp</option>
-<option value="50" data-name="Community Gardening">Community Gardening - R50 pp</option>
-<option value="50" data-name="Youth Education">Youth Education - R50 pp</option>
-<option value="50" data-name="Clean Water Workshop">Clean Water Workshop - R50 pp</option>
-</select>
-
-<label for="qty">Number of People (Quantity):</label>
-<input type="number" id="qty" value="1" min="1" max="100" oninput="calcCost()">
-
-<label for="date">Preferred Date:</label>
-<input type="date" id="date" onchange="checkAvailability()">
-
-<p>Total Cost: R<span id="totalCost">50</span></p>
-<p>Formula: R50 x <span id="qtyDisplay">1</span> = R<span id="totalDisplay">50</span></p>
-
-<div id="availability" class="availability available">Availability: Available - Book now!</div>
-<div id="discountMsg" style="color:green; font-weight:bold;"></div>
-
-<button onclick="compileEnquiry()">Compile Enquiry for Contact Page</button>
-<p id="compiled" style="background:#eee; padding:10px; margin-top:15px;"></p>
+<label>Program:</label>
+<select id="program"><option value="50">Solar Training - R50</option><option value="50">Community Gardening - R50</option></select>
+<label>Quantity:</label><input type="number" id="qty" value="1" min="1" oninput="calcCost()">
+<p>Total: R<span id="total">50</span> (R50 x qty)</p>
+<div id="availability">Availability: Available</div>
 </div>
-</main>
+
+<form id="enquiryForm" style="margin-top:20px; background:#fff; padding:20px; border:1px solid #ddd; border-radius:10px;">
+<h2>Your Details</h2>
+<label>Name*:</label><input type="text" id="name"><span id="nameError" class="error"></span>
+<label>Email*:</label><input type="email" id="email"><span id="emailError" class="error"></span>
+<label>Phone:</label><input type="tel" id="phone"><span id="phoneError" class="error"></span>
+<label>Message:</label><textarea id="message" rows="4"></textarea><span id="msgError" class="error"></span>
+<button type="submit">Submit Enquiry (AJAX - No Reload)</button>
+</form>
+<div id="formStatus"></div>
 
 <script>
 function calcCost(){
- let price=50;
- let qty=parseInt(document.getElementById('qty').value) || 1;
- if(qty < 1) qty=1;
- let total=price*qty;
- document.getElementById('totalCost').innerText=total;
- document.getElementById('qtyDisplay').innerText=qty;
- document.getElementById('totalDisplay').innerText=total;
- 
- let discountMsg=document.getElementById('discountMsg');
- if(qty >= 10){ discountMsg.innerText="Group discount! 10% off for 10+ people. New total: R"+(total*0.9); }
- else { discountMsg.innerText=""; }
- checkAvailability();
-}
-function checkAvailability(){
- let qty=parseInt(document.getElementById('qty').value) || 1;
- let date=document.getElementById('date').value;
- let avail=document.getElementById('availability');
- if(qty > 20){ avail.className="availability limited"; avail.innerText="Availability: Limited - Large group, please contact 2 weeks in advance"; }
- else if(date){ avail.className="availability available"; avail.innerText="Availability: Available for "+date+" - "+qty+" spots reserved"; }
- else { avail.className="availability available"; avail.innerText="Availability: Available - Book now!"; }
-}
-function compileEnquiry(){
- let prog=document.getElementById('programSelect').options[document.getElementById('programSelect').selectedIndex].text;
- let qty=document.getElementById('qty').value;
- let total=document.getElementById('totalCost').innerText;
- let date=document.getElementById('date').value;
- let text=`Enquiry: ${prog} | Quantity: ${qty} | Total: R${total} | Date: ${date || 'Not set'}`;
- document.getElementById('compiled').innerText=text + " - Copy this to contact form or click button below to email.";
- localStorage.setItem('greenfuture_enquiry', text);
+ let qty=parseInt(document.getElementById('qty').value)||1;
+ let total=50*qty;
+ document.getElementById('total').innerText=total;
+ document.getElementById('availability').innerText=qty>10?"Availability: Limited":"Availability: Available";
 }
 calcCost();
+
+// VALIDATION + AJAX
+document.getElementById('enquiryForm').addEventListener('submit', function(e){
+ e.preventDefault(); // No page reload - AJAX requirement
+ let name=document.getElementById('name').value.trim();
+ let email=document.getElementById('email').value.trim();
+ let phone=document.getElementById('phone').value.trim();
+ let message=document.getElementById('message').value.trim();
+ let valid=true;
+
+ // Clear errors
+ document.getElementById('nameError').innerText="";
+ document.getElementById('emailError').innerText="";
+ document.getElementById('phoneError').innerText="";
+ document.getElementById('msgError').innerText="";
+
+ if(name.length<3){ document.getElementById('nameError').innerText="Name must be at least 3 characters"; valid=false; }
+ if(!email.includes('@') || !email.includes('.')){ document.getElementById('emailError').innerText="Enter valid email e.g. name@email.com"; valid=false; }
+ if(phone && phone.length<10){ document.getElementById('phoneError').innerText="Phone must be 10 digits"; valid=false; }
+ if(message.length<10){ document.getElementById('msgError').innerText="Message must be at least 10 characters"; valid=false; }
+
+ if(valid){
+   let qty=document.getElementById('qty').value;
+   let total=document.getElementById('total').innerText;
+   let prog=document.getElementById('program').options[document.getElementById('program').selectedIndex].text;
+   
+   // COMPILE ENQUIRY FOR CONTACT PAGE LINK
+   let enquiryText=`Program: ${prog} | Qty: ${qty} | Total: R${total} | Name: ${name} | Email: ${email}`;
+   localStorage.setItem('greenfuture_enquiry', enquiryText);
+
+   // AJAX simulation
+   document.getElementById('formStatus').innerHTML="<p class='success'>Sending via AJAX... (no page reload)</p>";
+   setTimeout(()=>{
+     document.getElementById('formStatus').innerHTML=`<div class='success'>✓ Enquiry sent successfully!<br>${enquiryText}<br><br>
+     <button onclick="sendToContact()">Open Contact Page with Mailto</button></div>`;
+     document.getElementById('enquiryForm').reset();
+     calcCost();
+   }, 1200);
+ }
+});
+
+function sendToContact(){
+ let name=document.getElementById('name').value || localStorage.getItem('greenfuture_enquiry');
+ let subject=encodeURIComponent("GreenFuture Enquiry - "+name);
+ let body=encodeURIComponent(localStorage.getItem('greenfuture_enquiry') || "Enquiry from website");
+ window.location.href=`contact.html?enquiry=${body}`;
+ // For actual email: window.location.href=`mailto:info@greenfuture.org.za?subject=${subject}&body=${body}`;
+}
 </script>
+</main>
 </body>
 </html>
